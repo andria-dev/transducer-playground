@@ -1,16 +1,10 @@
-import dragons from './dragons.json';
-
-const map = transform => reducer => {
+export const tMap = transform => reducer => {
   return (accumulator, currentItem) => {
-    const processed = transform(currentItem); //?
-    return reducer(accumulator, processed); //?
+    const processed = transform(currentItem);
+    return reducer(accumulator, processed);
   };
 };
 
-const arrayReducer = (acc, item) => acc.concat(item);
-
-const getName = map(dragon => dragon.name);
-const upperCaseName = map(name => name.toUpperCase());
-
-// dragons.reduce(upperCaseName(getName(arrayReducer))) //?
-getName(arrayReducer)([], { name: 'test' }); //?
+export const arrayReducer = (acc, item) => acc.concat(item);
+export const stringReducer = (acc, item) => acc + item;
+export const objectReducer = (acc, [key, value]) => ({ ...acc, [key]: value });
