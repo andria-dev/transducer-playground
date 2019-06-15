@@ -19,6 +19,16 @@ export const arrayReducer = (acc, item) => acc.concat(item);
 export const stringReducer = (acc, item) => acc + item;
 export const objectReducer = (acc, [key, value]) => ({ ...acc, [key]: value });
 
-export const composeReducer = (acc, reducer) => reducer(acc);
-export const compose = (...reducers) => val =>
-  reducers.reduce(composeReducer, val);
+export const composeReducer = (acc, reducer) => val => acc(reducer(val));
+export const compose = (...reducers) => reducers.reduceRight(composeReducer);
+
+/* MUCH MUCH SLOWER
+export function compose(...reducers) {
+  let reducer;
+
+  do {
+    reducer = reducers.shift();
+  } while (reducers.length);
+
+  return reducer;
+} */

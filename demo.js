@@ -9,13 +9,13 @@ import {
 } from './index.js';
 
 let dragons = dragonsJSON;
-for (let i = 0; i < 10; ++i) {
+for (let i = 0; i < 3; ++i) {
   dragons = dragons.concat(dragons);
 }
 
 dragons.length; //?
 
-const getDragonTitle = tMap(dragon => {
+const getDragonTitle = dragon => {
   if (dragon.size > 300) {
     return `${dragon.name} The Great`;
   } else if (dragon.size < 250) {
@@ -23,20 +23,40 @@ const getDragonTitle = tMap(dragon => {
   }
 
   return dragon.name;
-});
-const upperCaseTransducer = tMap(value => value.toUpperCase());
-const isGreatFilterTransducer = tFilter(name => name.includes('GREAT'));
+};
+const upperCase = value => value.toUpperCase();
+const isGreat = name => name.includes('GREAT');
 
-const includeKeysFilterTransducer = (...keys) =>
-  tFilter(([key]) => keys.includes(key));
-const excludeKeysFilterTransducer = (...keys) =>
-  tFilter(([key]) => !keys.includes(key));
+const getDragonTitleTransducer = tMap(getDragonTitle);
+const upperCaseTransducer = tMap(upperCase);
+const isGreatFilterTransducer = tFilter(isGreat);
 
-dragons.reduce(
-  compose(
-    isGreatFilter,
-    upperCase,
-    getDragonTitle
-  )(arrayReducer),
-  []
-); //?.
+// const includeKeysFilterTransducer = (...keys) =>
+//   tFilter(([key]) => keys.includes(key));
+// const excludeKeysFilterTransducer = (...keys) =>
+//   tFilter(([key]) => !keys.includes(key));
+
+const dragonReducer = compose(
+  isGreatFilterTransducer,
+  upperCaseTransducer,
+  getDragonTitleTransducer
+)(arrayReducer);
+
+// Transducers (SLOWEST)
+dragons.reduce(dragonReducer, []);
+//?.
+
+// Array methods
+dragons
+  .map(getDragonTitle)
+  .map(upperCase)
+  .filter(isGreat);
+//?.
+
+// For loop (FASTEST)
+(() => {
+  const dragonNames = [];
+  for (const dragon of dragons) {
+    dragonNames.push(dragon.name);
+  }
+})(); //?.
