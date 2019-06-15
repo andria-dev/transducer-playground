@@ -1,5 +1,19 @@
-import dragons from './dragons.json';
-import { tMap, tFilter, arrayReducer } from './index.js';
+import dragonsJSON from './dragons.json';
+import {
+  tMap,
+  tFilter,
+  arrayReducer,
+  stringReducer,
+  objectReducer,
+  compose
+} from './index.js';
+
+let dragons = dragonsJSON;
+for (let i = 0; i < 10; ++i) {
+  dragons = dragons.concat(dragons);
+}
+
+dragons.length; //?
 
 const getDragonTitle = tMap(dragon => {
   if (dragon.size > 300) {
@@ -10,7 +24,19 @@ const getDragonTitle = tMap(dragon => {
 
   return dragon.name;
 });
-const upperCase = tMap(name => name.toUpperCase());
-const greatFilter = tFilter(name => name.includes('GREAT'));
+const upperCaseTransducer = tMap(value => value.toUpperCase());
+const isGreatFilterTransducer = tFilter(name => name.includes('GREAT'));
 
-dragons.reduce(getDragonTitle(upperCase(greatFilter(arrayReducer))), []); //?
+const includeKeysFilterTransducer = (...keys) =>
+  tFilter(([key]) => keys.includes(key));
+const excludeKeysFilterTransducer = (...keys) =>
+  tFilter(([key]) => !keys.includes(key));
+
+dragons.reduce(
+  compose(
+    isGreatFilter,
+    upperCase,
+    getDragonTitle
+  )(arrayReducer),
+  []
+); //?.

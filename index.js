@@ -18,3 +18,7 @@ export const tFilter = predicate => reducer => {
 export const arrayReducer = (acc, item) => acc.concat(item);
 export const stringReducer = (acc, item) => acc + item;
 export const objectReducer = (acc, [key, value]) => ({ ...acc, [key]: value });
+
+export const composeReducer = (acc, reducer) => reducer(acc);
+export const compose = (...reducers) => val =>
+  reducers.reduce(composeReducer, val);
