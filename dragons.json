@@ -1,0 +1,104 @@
+[
+  {
+    "name": "Malkov",
+    "breathesFire": true,
+    "heightInMeters": 200,
+    "color": "burgundy"
+  },
+  {
+    "name": "Dradi",
+    "breathesFire": true,
+    "heightInMeters": 240,
+    "color": "burgundy"
+  },
+  {
+    "name": "Mystique",
+    "breathesFire": true,
+    "heightInMeters": 266,
+    "color": "burgundy"
+  },
+  {
+    "name": "Carl",
+    "breathesFire": true,
+    "heightInMeters": 310,
+    "color": "burgundy"
+  },
+  {
+    "name": "Alphansa",
+    "breathesFire": true,
+    "heightInMeters": 400,
+    "color": "burgundy"
+  },
+  {
+    "name": "Tuti",
+    "breathesFire": true,
+    "heightInMeters": 375,
+    "color": "burgundy"
+  },
+  {
+    "name": "Fruti",
+    "breathesFire": true,
+    "heightInMeters": 211,
+    "color": "burgundy"
+  },
+  {
+    "breathesFire": true,
+    "color": "neon green",
+    "heightInYards": 200,
+    "name": "Kenyatta"
+  },
+  {
+    "breathesFire": false,
+    "color": "royal fuchsia",
+    "heightInYards": 187,
+    "name": "Dakota"
+  },
+  {
+    "breathesFire": false,
+    "color": "wageningen green",
+    "heightInYards": 305,
+    "name": "America"
+  },
+  {
+    "breathesFire": true,
+    "color": "mint cream",
+    "heightInYards": 198,
+    "name": "Jarrett"
+  },
+  {
+    "breathesFire": true,
+    "color": "portland orange",
+    "heightInYards": 304,
+    "name": "Joey"
+  },
+  {
+    "breathesFire": false,
+    "color": "soap",
+    "heightInYards": 394,
+    "name": "Nickolas"
+  },
+  {
+    "breathesFire": true,
+    "color": "satin sheen gold",
+    "heightInYards": 155,
+    "name": "Lucious"
+  },
+  {
+    "breathesFire": false,
+    "color": "seashell",
+    "heightInYards": 138,
+    "name": "Sadie"
+  },
+  {
+    "breathesFire": true,
+    "color": "lion",
+    "heightInYards": 364,
+    "name": "Dariana"
+  },
+  {
+    "breathesFire": true,
+    "color": "non-photo blue",
+    "heightInYards": 224,
+    "name": "Germaine"
+  }
+]
