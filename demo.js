@@ -1,5 +1,5 @@
 import dragons from './dragons.json';
-import { tMap, arrayReducer } from './index.js';
+import { tMap, tFilter, arrayReducer } from './index.js';
 
 const getDragonTitle = tMap(dragon => {
   if (dragon.size > 300) {
@@ -11,5 +11,6 @@ const getDragonTitle = tMap(dragon => {
   return dragon.name;
 });
 const upperCase = tMap(name => name.toUpperCase());
+const greatFilter = tFilter(name => name.includes('GREAT'));
 
-dragons.reduce(getDragonTitle(upperCase(arrayReducer)), []);
+dragons.reduce(getDragonTitle(upperCase(greatFilter(arrayReducer))), []); //?
