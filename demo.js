@@ -9,9 +9,10 @@ import {
 } from './index.js';
 
 let dragons = dragonsJSON;
-for (let i = 0; i < 3; ++i) {
-  dragons = dragons.concat(dragons);
+for (let i = 0; i < 5; ++i) {
+  dragons = dragons.reverse().concat(dragons.reverse());
 }
+dragons = dragons.map(dragon => ({ ...dragon, size: Math.random() * 1000 }));
 
 dragons.length; //?
 
@@ -37,26 +38,30 @@ const isGreatFilterTransducer = tFilter(isGreat);
 //   tFilter(([key]) => !keys.includes(key));
 
 const dragonReducer = compose(
+  arrayReducer,
   isGreatFilterTransducer,
   upperCaseTransducer,
   getDragonTitleTransducer
-)(arrayReducer);
+);
 
-// Transducers (SLOWEST)
-dragons.reduce(dragonReducer, []);
-//?.
-
-// Array methods
-dragons
-  .map(getDragonTitle)
-  .map(upperCase)
-  .filter(isGreat);
-//?.
-
-// For loop (FASTEST)
-(() => {
+function forLoopDragonReducer() {
   const dragonNames = [];
   for (const dragon of dragons) {
     dragonNames.push(dragon.name);
   }
-})(); //?.
+}
+
+for (let i = 0; i < 60; ++i) {
+  // Transducers (SLOWEST) ~11ms
+  dragons.reduce(dragonReducer, []); //?.
+  // average benchmark: 11ms
+
+  // Array methods ~10ms
+  dragons
+    .map(getDragonTitle)
+    .map(upperCase)
+    .filter(isGreat); //?.
+
+  // For loop (FASTEST) ~3ms
+  forLoopDragonReducer(); //?.
+}

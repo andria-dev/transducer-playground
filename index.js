@@ -22,8 +22,9 @@ export const arrayReducer = (acc, item) => {
 export const stringReducer = (acc, item) => acc + item;
 export const objectReducer = (acc, [key, value]) => ({ ...acc, [key]: value });
 
-export const composeReducer = (acc, reducer) => val => acc(reducer(val));
-export const compose = (...reducers) => reducers.reduceRight(composeReducer);
+// export const composeReducer = (acc, reducer) => val => acc(reducer(val));
+export const composeReducer = (acc, reducer) => reducer(acc);
+export const compose = (...reducers) => reducers.reduce(composeReducer);
 
 /* MUCH MUCH SLOWER
 export function compose(...reducers) {
